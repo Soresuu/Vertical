@@ -1,0 +1,362 @@
+/* ==========================================================
+   Vertical — Coming soon
+   Medidas tomadas de Figma:
+   - Escritorio: frame "Vertical /Coming Soon /Home" 1440 × 1024
+   - Móvil:      frame "Vertical / Home" 430 × 932
+   ========================================================== */
+
+/* ---------- Tipografía ----------
+   El diseño usa ABC Diatype Medium (Dinamo, de pago).
+   Si tienes la licencia web, copia los archivos a assets/fonts/ con estos
+   nombres y descomenta el bloque de abajo. Mientras tanto se usa Hanken Grotesk Medium (Google Fonts, licencia OFL), la alternativa libre más parecida. */
+/* Descomenta este bloque cuando tengas los archivos de ABC Diatype:
+@font-face {
+  font-family: "ABC Diatype";
+  src: url("../assets/fonts/ABCDiatype-Medium.woff2") format("woff2"),
+       url("../assets/fonts/ABCDiatype-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("../assets/fonts/HankenGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --vh: 100vh;             /* alto de ventana (en móvil, el visible sin barras) */
+  --c-bg: #ffffff;
+  --c-text: #000000;
+  --c-muted: #9f9f9f;      /* textos grises y estados atenuados */
+  --c-lang-off: #818181;   /* idioma no activo */
+
+  --font: "ABC Diatype", "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --fs-body: 16px;
+  --fs-small: 10px;
+  --fs-marker: 10.32px;
+  --lh: 1.3;               /* interlineado equivalente al "auto" de Diatype en Figma */
+
+  --dur: 0.2s;             /* Dissolve 200 ms ease-out del prototipo */
+  --ease: ease-out;
+
+  /* Escritorio */
+  --landing-w: 900px;
+  --text-w: 731.366px;
+  /* AJUSTE A PANTALLA (sin scroll): los espacios verticales se encogen según
+     la altura de la ventana. Hay 6 espacios iguales: logo, encabezado, frase,
+     fotos, texto fundadores, enlaces y pie quedan todos a la misma distancia.
+     432px = alto fijo de logo (12) + pie (7) + textos y fotos (413).
+     El primer valor del clamp() es el mínimo y el último el máximo. */
+  --gap: clamp(24px, calc((var(--vh) - var(--logo-top) - var(--footer-bottom) - 432px) / 6), 160px);
+  --photo-w: 109px;
+  --photo-h: 150.827px;
+  --photos-h: 173.827px;   /* foto + espacio del pie oculto, como en Figma */
+  --founders-h: 115px;     /* alto del texto de fundadores (versión más larga, EN) */
+  --stage-h: calc(var(--photos-h) + var(--gap) + var(--founders-h)); /* altura de la lista = fotos + gap + fundadores */
+  --logo-top: clamp(14px, 2vh, 20.5px);
+  --footer-bottom: clamp(14px, 1.9vh, 19.5px);
+  --landing-shift: 0px;    /* contenido centrado: mismo espacio logo-contenido que contenido-pie */
+  --page-pad: var(--gap);  /* logo-encabezado y enlaces-pie = mismo espacio que entre bloques */
+  --pad-top: calc(var(--logo-top) + 12px + var(--page-pad));         /* 12px = alto del logo */
+  --pad-bottom: calc(var(--footer-bottom) + 7px + var(--page-pad));  /* 7px = alto del pie */
+}
+
+@supports (height: 100svh) {
+  :root { --vh: 100svh; }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --landing-w: 430px;
+    --text-w: 390px;
+    /* Móvil: medidas fijas de Figma (aquí sí se permite scroll) */
+    --gap: 60px;
+    --photos-h: 150.827px;
+    --founders-h: 178px;
+    --logo-top: 81.388px;
+    --footer-bottom: 18.612px;
+    --landing-shift: 2.5px;
+    --page-pad: 60px;
+    --pad-top: calc(var(--logo-top) + var(--page-pad));
+    --pad-bottom: calc(var(--footer-bottom) + var(--page-pad));
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: var(--lh);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+a { -webkit-tap-highlight-color: transparent; }
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Recorte del texto a la altura de mayúsculas (Figma: text-box-trim cap / alphabetic) */
+.trim { text-box: trim-both cap alphabetic; }
+@supports not (text-box: trim-both cap alphabetic) {
+  .trim { margin-block: -0.29em -0.22em; }
+  .contact a, .site-footer .trim, .headline .trim { display: block; }
+}
+
+/* ---------- Página ---------- */
+.page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  position: absolute;
+  top: var(--logo-top);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.logo { display: block; }
+.logo img { width: 85.496px; height: 12px; }
+
+.landing {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pad-top) 20px var(--pad-bottom);
+}
+
+.landing__inner {
+  position: relative;
+  top: var(--landing-shift);
+  width: min(var(--landing-w), 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  text-align: center;
+}
+.landing.is-resetting .landing__inner { animation: fade-in 0.6s ease-in-out; }
+
+/* ---------- Encabezado ---------- */
+.headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-small);
+  line-height: normal;
+}
+.headline__title { font-size: inherit; font-weight: 500; }
+.headline__status { color: var(--c-muted); }
+
+/* ---------- Texto con categorías / fundadores ---------- */
+.lead,
+.founders {
+  width: min(var(--text-w), 100%);
+  font-size: var(--fs-body);
+  line-height: var(--lh);
+  transition: color var(--dur) var(--ease);
+}
+
+.hl { transition: color var(--dur) var(--ease); }
+
+/* Saltos de línea forzados ({brd} en js/content.js): solo en escritorio */
+.br-mobile-space { display: none; }
+@media (max-width: 767px) {
+  .br-desktop { display: none; }
+  .br-mobile-space { display: inline; }
+}
+
+.marker {
+  position: relative;
+  top: -0.4em;
+  font-size: var(--fs-marker);
+  line-height: 0;
+}
+
+.cat { display: inline; text-align: inherit; }
+
+/* Hover o selección de categoría: se atenúa la frase salvo la palabra activa */
+.landing[data-focus-cat] .lead,
+.landing[data-category] .lead { color: var(--c-muted); }
+.lead .cat.is-on { color: var(--c-text); }
+
+/* ---------- Zona central ---------- */
+.stage {
+  width: 100%;
+  min-height: var(--stage-h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.founders-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  width: 100%;
+}
+.founders-view[hidden],
+.roster-view[hidden] { display: none; }
+
+.photos {
+  display: flex;
+  gap: 10px;
+  max-width: 100%;
+  height: var(--photos-h);
+  align-items: flex-start;
+}
+.photos li { flex: 0 1 var(--photo-w); min-width: 0; }
+.photo {
+  display: block;
+  width: 100%;
+  max-width: var(--photo-w);
+  aspect-ratio: 109 / 150.827;
+  height: auto;
+  transition: opacity var(--dur) var(--ease);
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.founders { min-height: var(--founders-h); }
+.founders__p + .founders__p { margin-top: calc(var(--lh) * 1em); }
+.founders__p:first-child { text-box: trim-start cap alphabetic; }
+.founders__p:last-child { text-box: trim-end cap alphabetic; }
+
+/* Hover en una foto o un fundador */
+.landing[data-focus-person] .founders { color: var(--c-muted); }
+.founders .person.is-on { color: var(--c-text); }
+.landing[data-focus-person] .photo:not(.is-on) { opacity: 0.2; }
+
+/* ---------- Lista de talentos ---------- */
+.roster-view {
+  width: min(var(--text-w), 100%);
+  min-height: var(--stage-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in var(--dur) var(--ease);
+}
+.roster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.roster li,
+.contact li { display: flex; justify-content: center; }
+.roster__link {
+  display: block;
+  font-size: var(--fs-body);
+  line-height: normal;
+  transition: color var(--dur) var(--ease);
+}
+.roster__link:hover,
+.roster__link:active { color: var(--c-muted); }
+
+/* ---------- Contacto ---------- */
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--fs-small);
+  line-height: normal;
+}
+.contact a {
+  display: block;
+  color: var(--c-muted);
+  transition: color var(--dur) var(--ease);
+}
+.contact a:hover,
+.contact a:active { color: var(--c-text); }
+
+/* ---------- Pie ---------- */
+.site-footer {
+  position: absolute;
+  bottom: var(--footer-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--fs-small);
+  line-height: normal;
+  white-space: nowrap;
+}
+.lang { display: flex; align-items: center; gap: 8px; }
+.lang__btn {
+  color: var(--c-lang-off);
+  line-height: normal;
+  transition: color var(--dur) var(--ease);
+}
+.lang__btn[aria-pressed="true"],
+.lang__btn:hover { color: var(--c-text); }
+
+/* Pantallas muy estrechas (< 360 px): evita que el pie se salga */
+@media (max-width: 359px) {
+  .site-footer { white-space: normal; flex-wrap: wrap; justify-content: center; width: calc(100% - 40px); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

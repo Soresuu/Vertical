@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vertical — Building Global Icons</title>
+  <meta name="description" content="At Vertical, we represent and develop the personal brands of athletes, creators and artists who go beyond their fields.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/svg+xml" href="assets/img/vertical-logo.svg">
+  <link rel="preload" href="assets/fonts/HankenGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="site-header">
+      <a class="logo" href="./" id="logo" aria-label="Vertical">
+        <img src="assets/img/vertical-logo.svg" width="86" height="12" alt="Vertical">
+      </a>
+    </header>
+
+    <main class="landing" id="landing">
+      <div class="landing__inner">
+
+        <!-- Encabezado -->
+        <div class="headline">
+          <h1 class="headline__title trim" data-i18n="tagline"></h1>
+          <p class="headline__status trim" data-i18n="status"></p>
+        </div>
+
+        <!-- Frase con las categorías (Athletes / Creators / Artists). Se rellena desde js/content.js -->
+        <p class="lead trim" id="lead"></p>
+
+        <!-- Zona central: fotos + fundadores, o lista de talentos de la categoría elegida -->
+        <div class="stage">
+          <div class="founders-view" id="founders-view">
+            <ul class="photos" aria-label="Founders">
+              <li><a class="photo" data-person="marc" target="_blank" rel="noopener"><img src="assets/img/marc-marquez.png" width="109" height="151" alt="Marc Márquez"></a></li>
+              <li><a class="photo" data-person="jaime" target="_blank" rel="noopener"><img src="assets/img/jaime-martinez-recasens.png" width="109" height="151" alt="Jaime Martínez Recasens"></a></li>
+              <li><a class="photo" data-person="alex" target="_blank" rel="noopener"><img src="assets/img/alex-marquez.png" width="109" height="151" alt="Álex Márquez"></a></li>
+            </ul>
+            <div class="founders" id="founders"></div>
+          </div>
+
+          <div class="roster-view" id="roster-view" hidden>
+            <h2 class="visually-hidden" id="roster-title"></h2>
+            <ul class="roster" id="roster" aria-labelledby="roster-title"></ul>
+          </div>
+        </div>
+
+        <!-- Contacto -->
+        <ul class="contact">
+          <li><a class="trim" href="https://www.instagram.com/verticalgroup/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a class="trim" href="mailto:info@verticalgroup.es">info@verticalgroup.es</a></li>
+          <li><a class="trim" href="https://www.linkedin.com/company/wearevertical/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a class="trim" href="https://maps.app.goo.gl/7PaDjPHFXn9DmJ1H9" target="_blank" rel="noopener" data-i18n-aria="addressAria">C/ Ayala 27, Madrid</a></li>
+        </ul>
+
+      </div>
+      <p class="visually-hidden" id="live" aria-live="polite"></p>
+    </main>
+
+    <footer class="site-footer">
+      <p class="trim" data-i18n="copyright"></p>
+      <div class="lang" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang__btn trim" data-lang="en" lang="en" aria-label="English">EN</button>
+        <button type="button" class="lang__btn trim" data-lang="es" lang="es" aria-label="Español">ES</button>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/content.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
