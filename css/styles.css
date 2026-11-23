@@ -73,18 +73,30 @@
   :root {
     --landing-w: 430px;
     --text-w: 390px;
-    /* Móvil: medidas fijas de Figma (aquí sí se permite scroll) */
-    --gap: 60px;
-    --photos-h: 150.827px;
-    --founders-h: 178px;
-    --logo-top: 81.388px;
-    --footer-bottom: 18.612px;
-    --landing-shift: 2.5px;
-    --page-pad: 60px;
-    --pad-top: calc(var(--logo-top) + var(--page-pad));
-    --pad-bottom: calc(var(--footer-bottom) + var(--page-pad));
+    /* Móvil: AJUSTE A PANTALLA (sin scroll), igual que en escritorio.
+       Los 6 espacios verticales (logo, encabezado, frase, fotos, fundadores,
+       enlaces y pie) se reparten el alto libre de la ventana.
+       530px = alto fijo de logo, textos, fotos, enlaces y pie en móvil.
+       Mínimo 12px y máximo 60px (el espacio del frame de Figma). */
+    --gap: clamp(12px, calc((var(--vh) - var(--logo-top) - var(--footer-bottom) - 530px) / 6), 60px);
+    --photos-h: auto;
+    --founders-h: 0px;
+    --logo-top: clamp(16px, 3vh, 32px);
+    --footer-bottom: clamp(14px, 2.2vh, 18.612px);
+    --landing-shift: 0px;
+    --page-pad: var(--gap);
+    --stage-h: 0px;
+    --pad-top: calc(var(--logo-top) + 12px + var(--page-pad));
+    --pad-bottom: calc(var(--footer-bottom) + 7px + var(--page-pad));
   }
+  /* La lista de talentos ocupa como mucho el hueco de fotos + fundadores */
+  .roster { gap: min(32px, var(--gap)); }
 }
+/* Móviles bajos (p. ej. iPhone SE con barras del navegador): fotos algo más pequeñas */
+@media (max-width: 767px) and (max-height: 700px) {
+  :root { --photo-w: 88px; }
+}
+
 
 /* ---------- Base ---------- */
 *,

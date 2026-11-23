@@ -47,8 +47,8 @@ window.VERTICAL_CONTENT = {
     artists: [
       { name: 'JA Bayona',              url: 'https://www.instagram.com/filmbayona/' },
       { name: 'Candela Peña',           url: 'https://www.instagram.com/candela_penya/' },
-      { name: 'Miguel Ángel Silvestre', url: 'https://www.instagram.com/miguelangelsilvestre/' },
-      { name: 'Vicky Luengo',           url: 'https://www.instagram.com/vickyluengo/' }
+      { name: 'Vicky Luengo',           url: 'https://www.instagram.com/vickyluengo/' },
+      { name: 'Miguel Ángel Silvestre', url: 'https://www.instagram.com/miguelangelsilvestre/' }
     ]
   },
 
