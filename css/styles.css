@@ -369,6 +369,22 @@ a { -webkit-tap-highlight-color: transparent; }
   .stage,
   .founders-view { display: contents; }
   .roster { gap: 20px; }
+
+  /* Lista de talentos: ocupa el hueco de fotos + fundadores sin mover el resto
+     (la posición la calcula js/main.js). El espacio sobrante queda repartido
+     a partes iguales arriba y abajo. */
+  .landing__inner { position: relative; }
+  .landing[data-category] .photos,
+  .landing[data-category] .founders { visibility: hidden; }
+  .roster-view {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--roster-top, 0px);
+    height: var(--roster-h, auto);
+    width: auto;
+    min-height: 0;
+  }
 }
 
 @keyframes fade-in {

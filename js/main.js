@@ -178,8 +178,26 @@
     } else {
       delete landing.dataset.category;
     }
-    foundersView.hidden = !!cat;
     rosterView.hidden = !cat;
+    if (mqMobile.matches) {
+      // Móvil: fotos y fundadores siguen ocupando su sitio (invisibles) para que
+      // la frase de arriba y los enlaces no se muevan; la lista se centra encima.
+      foundersView.hidden = false;
+      placeRoster();
+    } else {
+      foundersView.hidden = !!cat;
+      rosterView.style.removeProperty('--roster-top');
+      rosterView.style.removeProperty('--roster-h');
+    }
+  }
+
+  // Coloca la lista (móvil) justo en el hueco que ocupan fotos + fundadores
+  function placeRoster() {
+    var inner = landing.querySelector('.landing__inner').getBoundingClientRect();
+    var top = foundersView.querySelector('.photos').getBoundingClientRect().top;
+    var bottom = foundersEl.getBoundingClientRect().bottom;
+    rosterView.style.setProperty('--roster-top', (top - inner.top) + 'px');
+    rosterView.style.setProperty('--roster-h', (bottom - top) + 'px');
   }
 
   function render() {
@@ -222,7 +240,10 @@
     refreshMarkers();
     renderRoster();
     renderView();
-    setFocusCat(landing.dataset.focusCat || null);
+    // En táctil, al abrir o cerrar se quita el resaltado del toque: el gris
+    // solo se mantiene mientras haya una categoría abierta.
+    if (isTouch) setFocusCat(null);
+    else setFocusCat(landing.dataset.focusCat || null);
     liveEl.textContent = state.category
       ? t().showing.replace('{category}', t().rosterTitle[state.category])
       : '';
@@ -302,7 +323,10 @@
   });
 
   // Cambia (1) ↔ (01) al cruzar el breakpoint móvil
-  var onMq = function () { refreshMarkers(); };
+  var onMq = function () { refreshMarkers(); renderView(); };
+  window.addEventListener('resize', function () {
+    if (mqMobile.matches && state.category) placeRoster();
+  });
   if (mqMobile.addEventListener) mqMobile.addEventListener('change', onMq);
   else mqMobile.addListener(onMq);
 
