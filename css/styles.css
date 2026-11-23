@@ -73,24 +73,14 @@
   :root {
     --landing-w: 430px;
     --text-w: 390px;
-    /* Móvil: AJUSTE A PANTALLA (sin scroll), igual que en escritorio.
-       Los 6 espacios verticales (logo, encabezado, frase, fotos, fundadores,
-       enlaces y pie) se reparten el alto libre de la ventana.
-       530px = alto fijo de logo, textos, fotos, enlaces y pie en móvil.
-       Mínimo 12px y máximo 60px (el espacio del frame de Figma). */
-    --gap: clamp(12px, calc((var(--vh) - var(--logo-top) - var(--footer-bottom) - 530px) / 6), 60px);
+    --fs-body: 14px;         /* textos grandes en móvil */
     --photos-h: auto;
     --founders-h: 0px;
+    --stage-h: 0px;
     --logo-top: clamp(16px, 3vh, 32px);
     --footer-bottom: clamp(14px, 2.2vh, 18.612px);
     --landing-shift: 0px;
-    --page-pad: var(--gap);
-    --stage-h: 0px;
-    --pad-top: calc(var(--logo-top) + 12px + var(--page-pad));
-    --pad-bottom: calc(var(--footer-bottom) + 7px + var(--page-pad));
   }
-  /* La lista de talentos ocupa como mucho el hueco de fotos + fundadores */
-  .roster { gap: min(32px, var(--gap)); }
 }
 /* Móviles bajos (p. ej. iPhone SE con barras del navegador): fotos algo más pequeñas */
 @media (max-width: 767px) and (max-height: 700px) {
@@ -359,6 +349,26 @@ a { -webkit-tap-highlight-color: transparent; }
 /* Pantallas muy estrechas (< 360 px): evita que el pie se salga */
 @media (max-width: 359px) {
   .site-footer { white-space: normal; flex-wrap: wrap; justify-content: center; width: calc(100% - 40px); }
+}
+
+/* ---------- Móvil: reparto del espacio ---------- */
+@media (max-width: 767px) {
+  /* Mismo espacio entre todos los bloques: logo, encabezado, frase, fotos,
+     fundadores (o lista de talentos), enlaces y pie.
+     El alto libre de la pantalla se reparte a partes iguales (space-evenly). */
+  .landing {
+    align-items: stretch;
+    padding: calc(var(--logo-top) + 12px) 20px calc(var(--footer-bottom) + 7px);
+  }
+  .landing__inner {
+    margin: 0 auto;
+    justify-content: space-evenly;
+    gap: 12px;               /* espacio mínimo si la pantalla es muy baja */
+    padding-block: 12px;     /* mismo mínimo arriba (logo) y abajo (pie) */
+  }
+  .stage,
+  .founders-view { display: contents; }
+  .roster { gap: 20px; }
 }
 
 @keyframes fade-in {
