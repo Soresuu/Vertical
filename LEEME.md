@@ -49,3 +49,6 @@ Solo en escritorio: la página siempre ocupa una pantalla y los espacios vertica
 - Sin desbordes horizontales en 320, 600, 768 y 1024 px de ancho.
 - Sin scroll vertical desde 1280 × 650 hasta 1920 × 1080 en escritorio, (en móvil sí hay scroll si la pantalla es más baja que el diseño).
 - Probados hover, clics de categorías, vuelta al inicio, enlaces, toque en móvil, teclado (Tab/Enter/Esc) y EN/ES. Sin errores en consola.
+
+## Al actualizar la web
+Si cambias css/styles.css o algún archivo de js/, cambia también el número `?v=` de esos archivos en index.html (por ejemplo, pon la fecha del día). Así los navegadores descargan la versión nueva en lugar de usar la guardada en caché.
