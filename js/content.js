@@ -71,11 +71,11 @@ window.VERTICAL_CONTENT = {
     },
     es: {
       title: 'Vertical — Building Global Icons',
-      description: 'En Vertical representamos a deportistas, creadores y artistas, construyendo su marca personal y ampliando su influencia más allá de su disciplina.',
+      description: 'En Vertical representamos y desarrollamos la marca personal de deportistas, creadores y artistas que trascienden su disciplina.',
       tagline: 'Building Global Icons',
       status: 'Web en desarrollo',
       categories: { athletes: 'Deportistas,', creators: 'Creadores', artists: 'Artistas' },
-      lead: 'En Vertical representamos a {athletes} {creators} y {artists}, construyendo su marca personal y ampliando su influencia más allá de su disciplina.',
+      lead: 'En Vertical representamos y desarrollamos la marca personal de {athletes} {creators} y {artists} que trascienden su disciplina.',
       founders: [
         'Fundada en Madrid en 2022 por {marc}, {jaime} y {alex}, Vertical combina estrategia, exigencia, ambición global y visión a largo plazo.',
         'Pocos nombres, ninguno al azar.{br}Nuestra filosofía es que los talentos no solo representen proyectos, sino que sean quienes los lideren.'
