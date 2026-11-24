@@ -18,7 +18,7 @@ window.VERTICAL_CONTENT = {
   people: {
     marc:  { name: 'Marc Márquez',            url: 'https://www.instagram.com/marcmarquez93/' },
     jaime: { name: 'Jaime Martínez Recasens', url: 'https://www.linkedin.com/in/jmrecasens/' },
-    alex:  { name: 'Álex Márquez',            url: 'https://www.instagram.com/alexmarquez73/' }
+    alex:  { name: 'Alex Márquez',            url: 'https://www.instagram.com/alexmarquez73/' }
   },
 
   // Número que aparece en superíndice delante de cada palabra interactiva
