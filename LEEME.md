@@ -8,7 +8,7 @@ css/styles.css      estilos (colores, medidas y breakpoints arriba del todo, en 
 js/content.js       TODOS los textos EN/ES, enlaces y listas de talentos (edita aquí)
 js/main.js          interacciones
 assets/img/         logo (SVG) y fotos de los fundadores
-assets/fonts/       tipografía (Hanken Grotesk, licencia OFL incluida)
+assets/fonts/       tipografía ABC Diatype Medium (woff2 + woff)
 ```
 
 ## Interacciones (sacadas del prototipo de Figma)
@@ -25,7 +25,7 @@ assets/fonts/       tipografía (Hanken Grotesk, licencia OFL incluida)
    - `assets/img/marc-marquez.png` (image 15)
    - `assets/img/jaime-martinez-recasens.png` (image 16)
    - `assets/img/alex-marquez.png` (image 14)
-2. **Tipografía ABC Diatype Medium** (la del diseño) es de pago (Dinamo). He puesto **Hanken Grotesk Medium** (gratuita, de Google Fonts), que de las que probé es la que corta las líneas casi igual que el diseño. Si compráis la licencia web, copia `ABCDiatype-Medium.woff2` en `assets/fonts/` y descomenta el bloque `@font-face` al principio de `css/styles.css`.
+2. **Tipografía:** ya se usa la del diseño, **ABC Diatype Medium** (Dinamo), en `assets/fonts/` (woff2 y woff). Es de pago: asegúrate de que la licencia cubre el uso web en este dominio.
 
 ## Suposiciones
 - **Años**: en el frame de escritorio pone "© 226" y "en 222"; en móvil pone 2026 y 2022. He usado **2026 y 2022** en las dos versiones.

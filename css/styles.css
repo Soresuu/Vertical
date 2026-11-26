@@ -6,22 +6,11 @@
    ========================================================== */
 
 /* ---------- Tipografía ----------
-   El diseño usa ABC Diatype Medium (Dinamo, de pago).
-   Si tienes la licencia web, copia los archivos a assets/fonts/ con estos
-   nombres y descomenta el bloque de abajo. Mientras tanto se usa Hanken Grotesk Medium (Google Fonts, licencia OFL), la alternativa libre más parecida. */
-/* Descomenta este bloque cuando tengas los archivos de ABC Diatype:
+   ABC Diatype Medium (Dinamo), la del diseño. Archivos en assets/fonts/. */
 @font-face {
   font-family: "ABC Diatype";
   src: url("../assets/fonts/ABCDiatype-Medium.woff2") format("woff2"),
        url("../assets/fonts/ABCDiatype-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-*/
-@font-face {
-  font-family: "Hanken Grotesk";
-  src: url("../assets/fonts/HankenGrotesk-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -34,7 +23,7 @@
   --c-muted: #9f9f9f;      /* textos grises y estados atenuados */
   --c-lang-off: #818181;   /* idioma no activo */
 
-  --font: "ABC Diatype", "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font: "ABC Diatype", "Helvetica Neue", Arial, sans-serif;
   --fs-body: 16px;
   --fs-small: 10px;
   --fs-marker: 10.32px;
